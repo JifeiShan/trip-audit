@@ -106,6 +106,19 @@
       cursor: pointer;
     }
 
+    .button-link {
+      width: 100%;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: #e8ece7;
+      color: var(--ink);
+      font-weight: 720;
+      text-decoration: none;
+    }
+
     .score {
       margin: 18px 0;
       padding: 16px;
@@ -136,6 +149,17 @@
 
     .muted {
       color: var(--muted);
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .secondary {
+      background: #e8ece7;
+      color: var(--ink);
     }
 
     footer {
@@ -179,9 +203,17 @@ Day 5 札幌购物，回国"></textarea>
 
       <aside class="side">
         <button id="audit">审计行程</button>
+        <div class="actions">
+          <button id="copy" class="secondary" type="button">复制结果</button>
+          <a class="button-link" href="inquiry.html">复制咨询问卷</a>
+        </div>
         <div id="score" class="score">等待输入</div>
         <div id="result" class="result">
           <p class="muted">粘贴行程后点击按钮。结果不是最终建议，只是帮你找出最该核对的点。</p>
+        </div>
+        <div class="item">
+          <strong>测试期报价</strong>
+          <span class="muted">免费自查后，如果你需要人工体检，测试价 99 元；完整重排从 699 元起。正式报价前会先判断需求是否适合。</span>
         </div>
       </aside>
     </div>
@@ -190,42 +222,31 @@ Day 5 札幌购物，回国"></textarea>
   <footer>正式出行前，请以官方交通、天气、住宿、安全与保险信息为准。</footer>
 
   <script>
-    const riskRules = [
-      {
-        name: "跨城移动可能过多",
-        test: text => (text.match(/札幌|函馆|东京|大阪|京都|青森|小樽|登别|洞爷|富良野|美瑛|镰仓|奈良|神户/g) || []).length >= 8,
-        advice: "同一天塞入多个城市时，最容易低估换乘、寄存行李、吃饭和休息时间。"
-      },
-      {
-        name: "山岳/徒步需要安全复核",
-        test: text => /登山|徒步|雪山|低山|山屋|缆车|高山|富士山|上高地|阿尔卑斯|锁链|路线|撤退/.test(text),
-        advice: "山岳路线需要核对天气、开放期、装备、体力、保险、通讯和撤退方案。"
-      },
-      {
-        name: "雪季或冬季风险",
-        test: text => /冬|雪|北海道|东北|暴风雪|结冰|白天|日照|雪道|自驾/.test(text),
-        advice: "冬季行程要特别核对日照长度、路况、交通停运、鞋服和备用日。"
-      },
-      {
-        name: "离岛/偏远交通风险",
-        test: text => /离岛|船|渡轮|岛|海岛|直升机|巴士|末班|接驳|无人/.test(text),
-        advice: "离岛和偏远地区要预留错过船班/巴士后的方案。"
-      },
-      {
-        name: "拍摄时间可能缺失",
-        test: text => /摄影|拍照|胶片|日出|日落|蓝调|极光|机位|相机|镜头/.test(text) && !/等待|备用|休息|空档|预留/.test(text),
-        advice: "摄影旅行需要等待和备用时段，不然只会变成赶路加举相机。"
-      },
-      {
-        name: "节奏词显示可能过满",
-        test: text => (text.match(/然后|接着|再去|顺路|打卡|晚上还|下午再|上午.*下午/g) || []).length >= 4,
-        advice: "频繁出现连续转场词，通常意味着计划看起来顺，实际没有缓冲。"
-      }
-    ];
+    let riskRules = [];
+    let lastResultText = "";
+
+    async function loadRules() {
+      const response = await fetch("assets/rules.json");
+      if (!response.ok) throw new Error("rules load failed");
+      riskRules = await response.json();
+    }
+
+    function countMatches(text, keywords) {
+      return keywords.reduce((total, keyword) => {
+        const matches = text.match(new RegExp(keyword, "g"));
+        return total + (matches ? matches.length : 0);
+      }, 0);
+    }
 
     function countDays(text) {
       const matches = text.match(/day\s*\d+|第[一二三四五六七八九十\d]+天|D\d+/gi);
       return matches ? new Set(matches.map(x => x.toLowerCase())).size : 0;
+    }
+
+    function ruleMatches(rule, text) {
+      const positive = countMatches(text, rule.keywords || []);
+      const negative = rule.negativeKeywords ? countMatches(text, rule.negativeKeywords) : 0;
+      return positive >= rule.threshold && negative === 0;
     }
 
     function auditPlan() {
@@ -237,17 +258,26 @@ Day 5 札幌购物，回国"></textarea>
         score.className = "score";
         score.textContent = "等待输入";
         result.innerHTML = '<p class="muted">先粘贴你的每日行程。</p>';
+        lastResultText = "";
         return;
       }
 
-      const hits = riskRules.filter(rule => rule.test(text));
+      if (!riskRules.length) {
+        score.className = "score high";
+        score.textContent = "规则未加载";
+        result.innerHTML = '<p class="muted">请刷新页面，或稍后再试。</p>';
+        lastResultText = "";
+        return;
+      }
+
+      const hits = riskRules.filter(rule => ruleMatches(rule, text));
       const days = countDays(text);
       const density = days ? Math.round(text.length / days) : text.length;
-      const hitNames = new Set(hits.map(hit => hit.name));
+      const hitIds = new Set(hits.map(hit => hit.id));
       const compoundWinterPhotoRisk =
-        hitNames.has("跨城移动可能过多") &&
-        hitNames.has("雪季或冬季风险") &&
-        hitNames.has("拍摄时间可能缺失");
+        hitIds.has("too_many_city_mentions") &&
+        hitIds.has("winter_or_snow") &&
+        hitIds.has("photo_without_buffer");
       let level = "低风险";
       let cls = "low";
 
@@ -269,9 +299,30 @@ Day 5 札幌购物，回国"></textarea>
 
       const next = '<div class="item"><strong>下一步</strong><span class="muted">如果你想做人工体检，可以返回首页复制咨询问卷，补充日期、预算、同行者和最担心的问题。</span></div>';
       result.innerHTML = meta + details + next;
+      lastResultText = [
+        `行程审计结果：${level}`,
+        `识别天数：${days || "未知"}`,
+        `命中规则：${hits.length}`,
+        ...hits.map(hit => `- ${hit.name}：${hit.advice}`),
+        "下一步：如需人工体检，请补充日期、预算、同行者和最担心的问题。"
+      ].join("\n");
     }
 
+    async function copyResult() {
+      if (!lastResultText) return;
+      try {
+        await navigator.clipboard.writeText(lastResultText);
+      } catch {
+        window.prompt("复制下面的审计结果", lastResultText);
+      }
+    }
+
+    loadRules().catch(() => {
+      document.getElementById("score").className = "score high";
+      document.getElementById("score").textContent = "规则加载失败";
+    });
     document.getElementById("audit").addEventListener("click", auditPlan);
+    document.getElementById("copy").addEventListener("click", copyResult);
   </script>
 </body>
 </html>
