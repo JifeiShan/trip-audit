@@ -20,7 +20,7 @@
 - 资料包。
 - 开源小工具。
 
-详细路线图见主工作区的 `money_research/public-roadmap.md`。
+详细路线图见 [ROADMAP.md](ROADMAP.md)。
 
 ## 页面
 
