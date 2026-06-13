@@ -262,7 +262,8 @@ Day 5 札幌购物，回国"></textarea>
         ? hits.map(hit => `<div class="item"><strong>${hit.name}</strong><span class="muted">${hit.advice}</span></div>`).join("")
         : '<div class="item"><strong>没有明显文本风险</strong><span class="muted">这不代表行程一定可行，关键交通和季节仍需人工核对。</span></div>';
 
-      result.innerHTML = meta + details;
+      const next = '<div class="item"><strong>下一步</strong><span class="muted">如果你想做人工体检，可以返回首页复制咨询问卷，补充日期、预算、同行者和最担心的问题。</span></div>';
+      result.innerHTML = meta + details + next;
     }
 
     document.getElementById("audit").addEventListener("click", auditPlan);
