@@ -9,6 +9,7 @@
 - 网站：https://jifeishan.github.io/trip-audit/
 - 咨询入口：https://jifeishan.github.io/trip-audit/contact.html
 - 行程审计器：https://jifeishan.github.io/trip-audit/auditor.html
+- 20 问清单：https://jifeishan.github.io/trip-audit/checklist.html
 - GitHub Issues：https://github.com/JifeiShan/trip-audit/issues
 - 启动日志：[LAUNCH_LOG.md](LAUNCH_LOG.md)
 
@@ -34,6 +35,7 @@
 
 - `index.html`：落地页。
 - `auditor.html`：行程审计器原型。
+- `checklist.html`：AI 日本行程出发前 20 问。
 - `inquiry.html`：咨询问卷复制页。
 - `contact.html`：咨询入口和接单边界。
 - `privacy.html`：隐私与服务边界。
