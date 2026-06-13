@@ -40,6 +40,22 @@ open index.html
 python3 -m http.server 8080
 ```
 
+## 检查链接
+
+从工作区根目录运行：
+
+```bash
+node money_research/scripts/check-site-links.mjs
+```
+
+## 设置正式站点 URL
+
+拿到 GitHub Pages 地址后，从工作区根目录运行：
+
+```bash
+node money_research/scripts/set-site-url.mjs https://your-name.github.io/trip-audit
+```
+
 ## GitHub Pages 发布方式
 
 当前机器的 `gh` 登录态已失效，需要先重新登录：
