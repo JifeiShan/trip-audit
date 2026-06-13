@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 行程自查 50 问 | 行前体检资料包</title>
+  <meta name="description" content="AI 行程自查 50 问资料包：50 个问题、风险评分表、AI 重写提示词，帮助判断日本自由行路线是否走得完。">
+  <style>
+    :root {
+      --ink: #18201d;
+      --muted: #5f6963;
+      --paper: #f7f4ee;
+      --line: #d8d0c3;
+      --accent: #2f6f73;
+      --accent-2: #b64f3f;
+      --white: #fffaf2;
+      --soft: #e8ece7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.68;
+    }
+    header, main, footer {
+      width: min(1060px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+    header {
+      padding: 34px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+    a { color: inherit; }
+    .back { text-decoration: none; color: var(--muted); font-size: 15px; }
+    h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      max-width: 860px;
+      margin: 34px 0 14px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 780px;
+      margin: 0 0 30px;
+    }
+    section {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+      gap: 18px;
+      align-items: start;
+    }
+    .card, .panel, .sample {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      padding: 22px;
+    }
+    .panel {
+      background: var(--ink);
+      color: var(--white);
+      position: sticky;
+      top: 18px;
+    }
+    .panel p { color: rgba(255, 250, 242, .78); }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+    .price {
+      color: var(--accent);
+      font-size: 34px;
+      font-weight: 780;
+      line-height: 1;
+      margin: 18px 0;
+    }
+    .muted { color: var(--muted); }
+    ul { padding-left: 20px; margin: 12px 0 0; }
+    li + li { margin-top: 8px; }
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: var(--accent);
+      color: white;
+      font-weight: 720;
+      text-decoration: none;
+      padding: 10px 16px;
+      margin-top: 10px;
+    }
+    .button.secondary { background: var(--soft); color: var(--ink); }
+    .samples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .sample strong { color: var(--ink); }
+    code {
+      background: var(--soft);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    footer {
+      padding: 30px 0 46px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    @media (max-width: 860px) {
+      header { display: block; }
+      .split, .samples { grid-template-columns: 1fr; }
+      .panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>行前体检</strong>
+    <a class="back" href="products.html">返回资料包</a>
+  </header>
+
+  <main>
+    <h1>AI 行程自查 50 问</h1>
+    <p class="lead">给已经用 AI 生成日本行程的人。它不替你“再写一版漂亮路线”，而是帮你判断：这份路线是不是太满、太赶、太依赖运气。</p>
+
+    <section class="split">
+      <div class="card">
+        <h2>交付内容</h2>
+        <ul>
+          <li><strong>50 个自查问题</strong>：覆盖时间密度、交通、季节、住宿、体力、拍摄、安全、户外和预算。</li>
+          <li><strong>风险评分表</strong>：用分数判断是否需要路线体检或深度重排。</li>
+          <li><strong>AI 重写提示词</strong>：让 AI 先删减、诊断、承认需要官方复核的部分。</li>
+          <li><strong>记录模板</strong>：把总分、红灯信号、必须删除项和官方复核点写清楚。</li>
+        </ul>
+      </div>
+      <aside class="panel">
+        <h2>测试价</h2>
+        <div class="price">¥29-49</div>
+        <p>适合不确定是否要付费咨询的人。正式购买前先复制问卷，说明你要这个资料包，我会先判断它是否适合你的路线。</p>
+        <a class="button" href="inquiry.html">复制问卷</a>
+        <a class="button secondary" href="offers.html">看人工服务</a>
+      </aside>
+    </section>
+
+    <section>
+      <h2>样章：先看 12 个关键问题</h2>
+      <div class="samples">
+        <div class="sample"><strong>1. 每天是否超过 3 个核心地点？</strong><br><span class="muted">超过时，先删而不是继续加交通。</span></div>
+        <div class="sample"><strong>2. 是否有一天跨越两个以上城市？</strong><br><span class="muted">跨城日最容易低估行李、找站台和延误。</span></div>
+        <div class="sample"><strong>3. 是否核对末班车？</strong><br><span class="muted">夜景、温泉、山区回程尤其需要核对。</span></div>
+        <div class="sample"><strong>4. 是否确认台风、暴雪、梅雨等季节风险？</strong><br><span class="muted">季节风险会改变整天路线，而不只是换一把伞。</span></div>
+        <div class="sample"><strong>5. 夜景后是否还能安全回住宿？</strong><br><span class="muted">便宜住宿如果换来夜间长距离通勤，可能不值。</span></div>
+        <div class="sample"><strong>6. 同行者体力是否一致？</strong><br><span class="muted">路线应该按体力最弱的人设计，而不是按地图最短距离。</span></div>
+        <div class="sample"><strong>7. 日落前是否预留 60-90 分钟？</strong><br><span class="muted">摄影旅行需要等待，不是按点打卡。</span></div>
+        <div class="sample"><strong>8. 是否购买合适保险？</strong><br><span class="muted">行前判断不能替代保险和安全决策。</span></div>
+        <div class="sample"><strong>9. 是否查看山岳天气？</strong><br><span class="muted">普通城市天气不等于山岳天气。</span></div>
+        <div class="sample"><strong>10. 是否算入临时改签和打车？</strong><br><span class="muted">预算太紧会让路线失去缓冲。</span></div>
+        <div class="sample"><strong>11. 如果晚点 2 小时，这一天还成立吗？</strong><br><span class="muted">不成立就说明计划太脆。</span></div>
+        <div class="sample"><strong>12. 这份行程删掉 30% 后，会不会更好？</strong><br><span class="muted">很多路线的第一版优化动作是删除。</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>评分规则</h2>
+      <p class="muted">50 个问题里，答不上来、没有核对、或答案明显不确定，都记 1 分。0-5 分可以自行完善；6-10 分建议做路线体检；11-18 分建议先删减和重排；19 分以上不要继续加景点。</p>
+      <p class="muted">涉及末班车、季节风险、频繁换酒店、同行者体力差异、山岳/离岛/雪季路线时，每项额外加 1 分。</p>
+    </section>
+
+    <section>
+      <h2>不适合谁</h2>
+      <ul>
+        <li>想要别人代订、代付款、抢票或处理订单。</li>
+        <li>想要保证安全、保证省钱、保证拍到某个场景。</li>
+        <li>需要签证、保险、医疗、法律或金融建议。</li>
+        <li>想买未经授权的课程资料、搬运攻略或灰色信息差。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>具体交通、天气、营业、安全、保险和入境规则，请以官方信息为准。这个资料包只提供原创检查框架和路线判断方法。</footer>
+</body>
+</html>

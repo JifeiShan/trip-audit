@@ -12,6 +12,7 @@
 - 20 问清单：https://jifeishan.github.io/trip-audit/checklist.html
 - 服务与报价：https://jifeishan.github.io/trip-audit/offers.html
 - 原创资料包：https://jifeishan.github.io/trip-audit/products.html
+- AI 行程自查 50 问：https://jifeishan.github.io/trip-audit/product-ai-itinerary-self-check.html
 - GitHub Issues：https://github.com/JifeiShan/trip-audit/issues
 - 启动日志：[LAUNCH_LOG.md](LAUNCH_LOG.md)
 - 运营手册：[OPERATIONS.md](OPERATIONS.md)
@@ -41,6 +42,7 @@
 - `checklist.html`：AI 日本行程出发前 20 问。
 - `offers.html`：服务与报价决策页。
 - `products.html`：原创资料包和低价数字产品页。
+- `product-ai-itinerary-self-check.html`：AI 行程自查 50 问详情和样章页。
 - `inquiry.html`：咨询问卷复制页。
 - `contact.html`：咨询入口和接单边界。
 - `privacy.html`：隐私与服务边界。
