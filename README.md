@@ -15,6 +15,7 @@
 - `index.html`：落地页。
 - `auditor.html`：行程审计器原型。
 - `inquiry.html`：咨询问卷复制页。
+- `contact.html`：咨询入口和接单边界。
 - `privacy.html`：隐私与服务边界。
 
 ## 方法
@@ -54,6 +55,14 @@ node money_research/scripts/check-site-links.mjs
 
 ```bash
 node money_research/scripts/set-site-url.mjs https://your-name.github.io/trip-audit
+```
+
+## 设置咨询入口
+
+发布前把占位联系方式替换成真实入口：
+
+```bash
+node money_research/scripts/set-contact.mjs 微信 your_wechat_id "填完问卷后发送纯文本，不要发送证件号、订单号或银行卡信息。"
 ```
 
 ## GitHub Pages 发布方式
