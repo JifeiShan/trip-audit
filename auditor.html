@@ -243,10 +243,15 @@ Day 5 札幌购物，回国"></textarea>
       const hits = riskRules.filter(rule => rule.test(text));
       const days = countDays(text);
       const density = days ? Math.round(text.length / days) : text.length;
+      const hitNames = new Set(hits.map(hit => hit.name));
+      const compoundWinterPhotoRisk =
+        hitNames.has("跨城移动可能过多") &&
+        hitNames.has("雪季或冬季风险") &&
+        hitNames.has("拍摄时间可能缺失");
       let level = "低风险";
       let cls = "low";
 
-      if (hits.length >= 4 || density > 180) {
+      if (hits.length >= 4 || density > 180 || compoundWinterPhotoRisk) {
         level = "高风险，建议人工重排";
         cls = "high";
       } else if (hits.length >= 2 || density > 110) {
