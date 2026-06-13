@@ -13,6 +13,7 @@
 - 服务与报价：https://jifeishan.github.io/trip-audit/offers.html
 - GitHub Issues：https://github.com/JifeiShan/trip-audit/issues
 - 启动日志：[LAUNCH_LOG.md](LAUNCH_LOG.md)
+- 运营手册：[OPERATIONS.md](OPERATIONS.md)
 
 ## 服务
 
@@ -41,6 +42,7 @@
 - `inquiry.html`：咨询问卷复制页。
 - `contact.html`：咨询入口和接单边界。
 - `privacy.html`：隐私与服务边界。
+- `OPERATIONS.md`：公开运营循环、报价梯度和接单边界。
 
 ## 方法
 
